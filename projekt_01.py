@@ -88,7 +88,7 @@ def analyzuj_text(k_analyze: int):
         else:
             statistiky_pocty_znaku[pocet_znaku] += 1
 
-    return statistiky
+    return statistiky, statistiky_pocty_znaku
 
 def vypis_statistiky(statistiky):
     print(f"Počet slov v textu je: {statistiky['pocet_slov']},")
@@ -97,6 +97,13 @@ def vypis_statistiky(statistiky):
     print(f"Počet slov psaných malými písmeny: {statistiky['pocet_slov_malymi']}")
     print(f"Počet čísel v textu: {statistiky['pocet_cisel']}")
     print(f"Součet těchto čísel se rovná: {statistiky['suma_cisel']}")
+
+def vypis_delky_slov(pocty_znaku):
+    print(f"| délka | výskyt znaků | počet |")
+    znak = "*" 
+    for delka, vyskyt in pocty_znaku.items():
+        print(f"|{delka: >7}|{znak * vyskyt: <14}|{vyskyt: <7}|")
+
 
 # hlavní pogram
 if __name__ == "__main__":
@@ -126,8 +133,10 @@ if __name__ == "__main__":
         
         print(f"Budeme analyzovat text číslo {k_analyze}")
         vypis_oddelovac()
-        analyzovany_text = analyzuj_text(k_analyze)
+        analyzovany_text, pocty_znaku = analyzuj_text(k_analyze)
         vypis_statistiky(analyzovany_text)
+        vypis_oddelovac()
+        vypis_delky_slov(pocty_znaku)
         
     else:
         print("Uživatel nenalezen nebo zadáno špatné heslo. Ukončuji program")
