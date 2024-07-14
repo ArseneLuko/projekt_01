@@ -18,6 +18,19 @@ uzivatele = {
 }
 
 # definice funkcí
+def vypis_oddelovac():
+    print(79 * "-")
+
+def ocisti_text(k_ocisteni):
+    """
+    Očistí zadaný text od znaků interpunkce: .,"'-?:!;
+    """
+    
+    # toto řešení jsem našel pomocí vyhledávání, není mé
+    vynechat = ".,\"'-?:!;"
+    
+    return "".join(znak for znak in k_ocisteni if znak not in vynechat)
+
 def analyzuj_text(k_analyze: int):
     """
     Analyzuje text z proměnné TEXTY. Funkce vrátí slovník s údaji a slovník s počtem slov každé délky.
@@ -37,13 +50,24 @@ def analyzuj_text(k_analyze: int):
         "pocet_cisel": 0, 
         "suma_cisel": 0
     }
-    text_k_analyze = TEXTS[k_analyze - 1] # vybere text ke zpracování
+
+    # slovník s počtem výsku slov jednotlivých délek, je uveden první údaj, aby bylo jasné, jaká kombinace klíč-hodnota se bude používat
+    statistiky_pocty_znaku = {
+        1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0,
+        10: 0, 11: 0, 12: 0
+    }
+
+    # vybere text ke zpracování zadaný uživatelem z proměnné TEXTS - 1, pro pořadí od 0
+    text_k_analyze = TEXTS[k_analyze - 1] 
+
+    # očistí text o znaky interpunkce
+    text_k_analyze = ocisti_text(text_k_analyze)
     
     # aktualizuje ve slovníku počet slov
     slov = len(text_k_analyze.split()) 
     statistiky.update(pocet_slov=slov)
 
-    # for cyklus, který postupně přidá počet slov s prvním velkým, všechny velké a všechny malé
+    # for cyklus, který postupně přidá počet slov s prvním velkým, všechny velké, všechny malé a číslice
     for word in text_k_analyze.split():
         if word.istitle():
             statistiky["pocet_slov_zacina_velkym"] += 1
@@ -52,8 +76,17 @@ def analyzuj_text(k_analyze: int):
         elif word.islower():
             statistiky["pocet_slov_malymi"] += 1
         elif word.isnumeric():
-            statistiky["pocet_cisel"] += 1
-            statistiky["suma_cisel"] += int(word)
+            statistiky["pocet_cisel"] += 1 # zvedne údaj počtu číslic
+            statistiky["suma_cisel"] += int(word) # přičte hodnotu číslice
+
+        # uloží do proměnné počet znaků procházeného slova
+        pocet_znaku = len(word) # !!! ale počítá například i tečku s posledním slovem
+
+        # pokud ve slovníku neexistuje klíč pro daný počet znaků, vytvoří jej. pokud esistuje, přičte 1 
+        if not pocet_znaku in statistiky_pocty_znaku:
+            statistiky_pocty_znaku[pocet_znaku] = 1
+        else:
+            statistiky_pocty_znaku[pocet_znaku] += 1
 
     return statistiky
 
@@ -73,9 +106,12 @@ if __name__ == "__main__":
 
     # otestujeme, jestli uživatel existuje a je zadáno odpovídající heslo
     if (jmeno in uzivatele) and (heslo == uzivatele[jmeno]):
+        vypis_oddelovac()
         print(f"{jmeno}, vítej v aplikaci,\nk analýze máme 3 texty.")
+        vypis_oddelovac()
         # k_analyze = input("Který text chceš analyzovat? Zadej číslo 1 - 3: ")
         k_analyze = 1 # slouží při testování k vynechání zadávání
+
         # otestuje, jestli je možné převést vstup na celé číslo
         try:
             k_analyze = int(k_analyze)
@@ -89,6 +125,7 @@ if __name__ == "__main__":
             quit()
         
         print(f"Budeme analyzovat text číslo {k_analyze}")
+        vypis_oddelovac()
         analyzovany_text = analyzuj_text(k_analyze)
         vypis_statistiky(analyzovany_text)
         
