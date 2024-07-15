@@ -53,11 +53,7 @@ def analyzuj_text(k_analyze: int):
     }
 
     # slovník s počtem výsku slov jednotlivých délek
-    # klíče jsou iniciovány už na začátku, aby byly seřazeny vzestupně
-    statistiky_pocty_znaku = {
-        1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0,
-        10: 0, 11: 0, 12: 0
-    }
+    statistiky_pocty_znaku = {}
 
     # vybere text ke zpracování zadaný uživatelem z proměnné TEXTS - 1, pro pořadí od 0
     text_k_analyze = TEXTS[k_analyze - 1] 
@@ -100,27 +96,29 @@ def vypis_statistiky(statistiky):
     print(f"Součet těchto čísel se rovná: {statistiky['suma_cisel']}")
 
 def vypis_delky_slov(pocty_znaku):
-    print(f"|{'Výskyt délek slov v textu': ^30}|")
-    print(f"|{30 * '-'}|")
-    print(f"| délka | výskyt znaků | počet |")
+    pocty_znaku = dict(sorted(pocty_znaku.items()))
+
+    print(f"|{'Výskyt délek slov v textu': ^36}|")
+    print(f"|{36 * '-'}|")
+    print(f"| délka | {'výskyt znaků:': <18} | počet |")
     znak = "*" 
     for delka, vyskyt in pocty_znaku.items():
-        print(f"|{delka: >7}|{znak * vyskyt: <14}|{vyskyt: <7}|")
+        print(f"|{delka: >7}|{znak * vyskyt: <20}|{vyskyt: <7}|")
 
 # hlavní pogram
 if __name__ == "__main__":
     vypis_oddelovac()
-    jmeno = input("Zadej uživatelské jméno: ")
-    heslo = input("Zadej heslo: ")
-    # jmeno, heslo = "bob", "123" # slouží při testování k vynechání zadávání
+    # jmeno = input("Zadej uživatelské jméno: ")
+    # heslo = input("Zadej heslo: ")
+    jmeno, heslo = "bob", "123" # slouží při testování k vynechání zadávání
 
     # otestujeme, jestli uživatel existuje a je zadáno odpovídající heslo
     if (jmeno in uzivatele) and (heslo == uzivatele[jmeno]):
         vypis_oddelovac()
         print(f"{jmeno}, vítej v aplikaci,\nk analýze máme 3 texty.")
         vypis_oddelovac()
-        k_analyze = input("Který text chceš analyzovat? Zadej číslo 1 - 3: ")
-        # k_analyze = 1 # slouží při testování k vynechání zadávání
+        # k_analyze = input("Který text chceš analyzovat? Zadej číslo 1 - 3: ")
+        k_analyze = 1 # slouží při testování k vynechání zadávání
 
         # otestuje, jestli je možné převést vstup na celé číslo
         try:
