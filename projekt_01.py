@@ -108,17 +108,17 @@ def vypis_delky_slov(pocty_znaku):
 # hlavní pogram
 if __name__ == "__main__":
     vypis_oddelovac()
-    # jmeno = input("Zadej uživatelské jméno: ")
-    # heslo = input("Zadej heslo: ")
-    jmeno, heslo = "bob", "123" # slouží při testování k vynechání zadávání
+    jmeno = input("Zadej uživatelské jméno: ")
+    heslo = input("Zadej heslo: ")
+    # jmeno, heslo = "bob", "123" # slouží při testování k vynechání zadávání
 
     # otestujeme, jestli uživatel existuje a je zadáno odpovídající heslo
     if (jmeno in uzivatele) and (heslo == uzivatele[jmeno]):
         vypis_oddelovac()
         print(f"{jmeno}, vítej v aplikaci,\nk analýze máme 3 texty.")
         vypis_oddelovac()
-        # k_analyze = input("Který text chceš analyzovat? Zadej číslo 1 - 3: ")
-        k_analyze = 1 # slouží při testování k vynechání zadávání
+        k_analyze = input("Který text chceš analyzovat? Zadej číslo 1 - 3: ")
+        # k_analyze = 1 # slouží při testování k vynechání zadávání
 
         # otestuje, jestli je možné převést vstup na celé číslo
         try:
@@ -142,4 +142,3 @@ if __name__ == "__main__":
         
     else:
         print("Uživatel nenalezen nebo zadáno špatné heslo. Ukončuji program")
-
