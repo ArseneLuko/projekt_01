@@ -14,6 +14,7 @@ uzivatele = {
     "mike": "password123",
     "liz": "pass123"
 }
+pocet_textu_k_analyze = 0
 
 # definice funkcí
 def vypis_oddelovac():
@@ -112,12 +113,14 @@ if __name__ == "__main__":
     heslo = input("Zadej heslo: ")
     # jmeno, heslo = "bob", "123" # slouží při testování k vynechání zadávání
 
+    pocet_textu_k_analyze = len(TEXTS)
+
     # otestujeme, jestli uživatel existuje a je zadáno odpovídající heslo
     if (jmeno in uzivatele) and (heslo == uzivatele[jmeno]):
         vypis_oddelovac()
-        print(f"{jmeno}, vítej v aplikaci,\nk analýze máme 3 texty.")
+        print(f"{jmeno}, vítej v aplikaci,\nk analýze máme {pocet_textu_k_analyze} texty.")
         vypis_oddelovac()
-        k_analyze = input("Který text chceš analyzovat? Zadej číslo 1 - 3: ")
+        k_analyze = input(f"Který text chceš analyzovat? Zadej číslo 1 - {pocet_textu_k_analyze}: ")
         # k_analyze = 1 # slouží při testování k vynechání zadávání
 
         # otestuje, jestli je možné převést vstup na celé číslo
@@ -127,9 +130,9 @@ if __name__ == "__main__":
             print("Je potřeba zadat celé číslo. Ukončuji program")
             quit()
 
-        # kontrola jestli je číslo v rozmezí 1 až 3
-        if k_analyze not in range(1,4):
-            print("Zadané číslo musí být v rozmezí 1 - 3. Ukončuji program")
+        # kontrola jestli je číslo v rozmezí 1 až počet textů
+        if k_analyze not in range(1,pocet_textu_k_analyze + 1):
+            print(f"Zadané číslo musí být v rozmezí 1 - {pocet_textu_k_analyze}. Ukončuji program")
             quit()
         
         print(f"Budeme analyzovat text číslo: {k_analyze}")

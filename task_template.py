@@ -26,5 +26,13 @@ are found in multiple limestone layers, which lie some
 represent several varieties of perch, as well as
 other freshwater genera and herring similar to those
 in modern oceans. Other fish such as paddlefish,
-garpike and stingray are also present.'''
+garpike and stingray are also present.''',
+'''Situated about 10 miles west of Kemmerer,
+Fossil Butte is a ruggedly impressive
+topographic feature that rises sharply
+some 1000 feet above Twin Creek Valley
+to an elevation of more than 7500 feet
+above sea level. The butte is located just
+north of US 30N and the Union Pacific Railroad,
+which traverse the valley. '''
 ]
