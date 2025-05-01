@@ -1,13 +1,13 @@
 """
-projekt_01.py: první projekt do Engeto Online Python Akademie
+main.py / Textový analyzátor : První projekt kurzu Engeto - Python
 author: Lukáš Karásek
 email: lukas@lukaskarasek.cz
-discord: lukaskarasek__77224
+discord: lukaskarasek_arsene
 """
-# importy
+
 from task_template import TEXTS
 
-# proměnné
+# uživatelé ze zadání úkolu
 uzivatele = {
     "bob": "123",
     "ann": "pass123",
@@ -16,7 +16,6 @@ uzivatele = {
 }
 pocet_textu_k_analyze = 0
 
-# definice funkcí
 def vypis_oddelovac():
     """
     Vypíše řadu 79 pomlček
@@ -27,14 +26,14 @@ def ocisti_text(k_ocisteni: str) -> str:
     """
     Očistí zadaný text od znaků interpunkce: .,"'-?:!;
     """
-    
+
     # toto řešení jsem našel pomocí vyhledávání, není mé
     vynechat = ".,\"'-?:!;"
     return "".join(znak for znak in k_ocisteni if znak not in vynechat)
 
 def analyzuj_text(k_analyze: int):
     """
-    Analyzuje text z proměnné TEXTY. Funkce vrátí slovník s údaji a slovník s počtem slov každé délky.
+    Analyzuje poskytnutý text. Funkce vrátí slovník s údaji a slovník s počtem slov každé délky.
     1. počet slov
     2. počet slov začínajících velkými písmeny
     3. počet slov psaných velkými písmeny
@@ -74,8 +73,8 @@ def analyzuj_text(k_analyze: int):
         elif word.islower():
             statistiky["pocet_slov_malymi"] += 1
         elif word.isnumeric():
-            statistiky["pocet_cisel"] += 1 # zvedne údaj počtu číslic
-            statistiky["suma_cisel"] += int(word) # přičte hodnotu číslice
+            statistiky["pocet_cisel"] += 1
+            statistiky["suma_cisel"] += int(word)
 
         # uloží do proměnné počet znaků procházeného slova
         pocet_znaku = len(word)
@@ -104,7 +103,7 @@ def vypis_delky_slov(pocty_znaku):
     print(f"| délka | {'výskyt znaků:': <18} | počet |")
     znak = "*" 
     for delka, vyskyt in pocty_znaku.items():
-        print(f"|{delka: >7}|{znak * vyskyt: <20}|{vyskyt: <7}|")
+        print(f"|{delka: >6} |{znak * vyskyt: <20}| {vyskyt: <6}|")
 
 # hlavní pogram
 if __name__ == "__main__":
