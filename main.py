@@ -1,11 +1,14 @@
 """
-main.py / Textový analyzátor : První projekt kurzu Engeto - Python
+main.py / Textový analyzátor: První projekt kurzu Engeto - Python
 author: Lukáš Karásek
 email: lukas@lukaskarasek.cz
 discord: lukaskarasek_arsene
 """
 
-from task_template import TEXTS
+# TODO: neukončit program když zadám číslo z jiného rozmezí
+# TODO: možnost vypsat text
+
+from texty import TEXTS
 
 # uživatelé ze zadání úkolu
 uzivatele = {
